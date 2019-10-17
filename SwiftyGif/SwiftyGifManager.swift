@@ -16,6 +16,7 @@ open class SwiftyGifManager {
     fileprivate var totalGifSize: Int
     fileprivate var memoryLimit: Int
     open var  haveCache: Bool
+    open var color: UIColor?
     
     /// Initialize a manager
     ///
@@ -114,7 +115,9 @@ open class SwiftyGifManager {
         
         for imageView in displayViews {
             DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).sync {
-                imageView.image = imageView.currentImage
+                let image = imageView.currentImage?.withRenderingMode(.alwaysTemplate)
+                imageView.tintColor = color
+                imageView.image = image
             }
             
             if imageView.isAnimatingGif() {

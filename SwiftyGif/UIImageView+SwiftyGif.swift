@@ -58,7 +58,7 @@ public extension UIImageView {
     /// - Parameter gifImage: The UIImage containing the gif backing data
     /// - Parameter manager: The manager to handle the gif display
     /// - Parameter loopCount: The number of loops we want for this gif. -1 means infinite.
-    func setGifImage(_ gifImage: UIImage, manager: SwiftyGifManager = .defaultManager, loopCount: Int = -1) {
+    func setGifImage(_ gifImage: UIImage, manager: SwiftyGifManager = .defaultManager, loopCount: Int = -1, color: UIColor? = nil) {
         if let imageData = gifImage.imageData, (gifImage.imageCount ?? 0) < 1 {
             image = UIImage(data: imageData)
             return
@@ -67,6 +67,7 @@ public extension UIImageView {
         self.loopCount = loopCount
         self.gifImage = gifImage
         animationManager = manager
+        animationManager?.color = color
         syncFactor = 0
         displayOrderIndex = 0
         cache = NSCache()
@@ -81,6 +82,7 @@ public extension UIImageView {
             }
         }
     }
+    
 }
 
 // MARK: - Download gif
